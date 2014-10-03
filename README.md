@@ -7,7 +7,9 @@ Nama kelompok : marc
 
 kelas : IF-36-03
 
-Anggota Kelompok :  Eka Pratama, 
+Anggota Kelompok :  
+
+                    Eka Pratama, 
                     
                     Pramudityo Sakti P  (ditopsp),
                     
