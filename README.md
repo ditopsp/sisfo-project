@@ -9,7 +9,7 @@ kelas : IF-36-03
 
 Anggota Kelompok :  
 
-                    Eka Pratama (bukanjoker), 
+                    Eka Pratamandhira (bukanjoker), 
                     
                     Pramudityo Sakti P  (ditopsp),
                     
