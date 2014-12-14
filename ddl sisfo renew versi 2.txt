@@ -1,0 +1,148 @@
+create table party(
+	id_party char(10) not null,
+	id_person char(10),
+	constraint party_pk primary key (id_party) enable,
+	constraint party_fk foreign key (id_person) references person (id_person) on delete cascade
+	);
+
+create table person(
+	id_person char(10) not null,
+	fullname varchar2(40),
+	nickname varchar2(30),
+	birth_date date,
+	marital_status varchar2(10),
+	gender varchar2(10),
+	pengalaman varchar2(100),
+	constraint person_pk primary key (id_person) enable
+	);
+
+create table party_classification(
+	id_party_classification char(10),
+	id_person char(10),
+	id_person_classification char(10),
+	constraint party_classification_pk primary key (id_party_classification) enable,
+	constraint party_classification_fk foreign key (id_person) references person (id_person) on delete cascade,
+	constraint party_classification_fk1 foreign key (id_person_classification) references person_classification (id_person_classification) on delete cascade
+	);
+	
+create table person_classification(
+	id_person_classification char(10) not null,
+	id_income_classification char(10),
+	id_job_classification char(10),
+	constraint person_classification_pk primary key (id_person_classification) enable,
+	constraint person_classification_fk foreign key (id_income_classification) references income_classification (id_income_classification) on delete cascade,
+	constraint person_classification_fk1 foreign key (id_job_classification) references job_classification (id_job_classification) on delete cascade
+	);
+	
+create table job_classification(
+	id_job_classification char(10) not null,
+	jobname varchar2(30),
+	jobclass varchar2(20),
+	constraint job_classification_pk primary key (id_job_classification) enable
+	);
+
+create table income_classification(
+	id_income_classification char(10) not null,
+	income number,
+	category_income varchar2(20),
+	constraint income_classification_pk primary key (id_income_classification) enable
+	);
+	
+create table party_role(
+	id_party_role char(10) not null,
+	id_party char(10),
+	id_person_role char(10),
+	id_customer char(10),
+	constraint party_role_pk primary key (id_party_role) enable,
+	constraint party_role_fk foreign key (id_party) references party (id_party) on delete cascade,
+	constraint party_role_fk1 foreign key (id_person_role) references person_role (id_person_role) on delete cascade,
+	constraint party_role_fk2 foreign key (id_customer) references customer (id_customer) on delete cascade
+	);
+	
+create table person_role(
+	id_person_role char(10) not null,
+	id_employee char(10),
+	id_contact char(10),
+	constraint person_role_pk primary key (id_person_role) enable,
+	constraint person_role_fk foreign key (id_employee) references employee (id_employee) on delete cascade,
+	constraint person_role_fk1 foreign key (id_contact) references contact (id_contact) on delete cascade
+	);
+	
+create table employee(
+	id_employee char(10) not null,
+	employee_role varchar2(20),
+	constraint employee_pk primary key (id_employee) enable
+	);
+	
+create table contact(
+	id_contact char(10) not null,
+	contact_address varchar2(60),
+	contact_number varchar2(20),
+	contact_email varchar2(20),
+	constraint contact_pk primary key (id_contact) enable
+	);
+	
+create table customer(
+	id_customer char(10) not null,
+	customer_name varchar2(30),
+	customer_contact varchar2(20),
+	customer_address varchar2(60),
+	id_bill_customer char(10),
+	id_ship_customer char(10),
+	id_end_user_customer char(10),
+	constraint customer_pk primary key (id_customer) enable,
+	constraint customer_fk foreign key (id_bill_customer) references bill_customer (id_bill_customer) on delete cascade,
+	constraint customer_fk1 foreign key (id_ship_customer) references ship_customer (id_ship_customer) on delete cascade,
+	constraint customer_fk2 foreign key (id_end_user_customer) references end_user_customer (id_end_user_customer) on delete cascade
+	);
+	
+create table bill_customer(
+	id_bill_customer char(10) not null,
+	bill_date date,
+	bill_cost number,
+	constraint bill_customer_pk primary key (id_bill_customer) enable
+	);
+	
+create table ship_customer(
+	id_ship_customer char(10) not null,
+	ship_date date,
+	ship_address varchar2(60),
+	constraint ship_customer_pk primary key (id_ship_customer) enable
+	);
+	
+create table end_user_customer(
+	id_end_user_customer char(10),
+	end_user_date date,
+	constraint end_user_customer_pk primary key (id_end_user_customer) enable
+	);
+	
+create table party_contact_mechanism(
+	id_party_contact_mechanism char(10) not null,
+	id_party_contact_mechanism char(10),
+	id_party char(10),
+	constraint party_contact_mechanism_pk primary key (id_party_contact_mechanism) enable,
+	constraint party_contact_mechanism_fk foreign key (id_party) references party (id_party) on delete cascade
+	);
+	
+create table contact_mechanism(
+	id_contact_mechanism char(10) not null,
+	id_telecomunication_number char(10),
+	id_electronic_address char(10),
+	constraint contact_mechanism_pk primary key (id_contact_mechanism) enable,
+	constraint contact_mechanism_fk foreign key (id_telecomunication_number) references telecomunication_number (id_telecomunication_number) on delete cascade,
+	constraint contact_mechanism_fk1 foreign key (id_electronic_address) references electronic_address (id_electronic_address) on delete cascade
+	);
+	
+create table telecomunication_number(
+	id_telecomunication_number char(10) not null,
+	area_code varchar2(10),
+	contact_mechanism varchar2(30),
+	country_code varchar2(10),
+	constraint telecomunication_number_pk primary key (id_telecomunication_number) enable
+	);
+	
+create table electronic_address(
+	id_electronic_address char(10) not null,
+	electronic_address_string varchar2(60),
+	constraint electronic_address_pk primary key (id_electronic_address) enable
+	);
